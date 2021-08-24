@@ -14,16 +14,18 @@
         palettes.set($palettes);
         localStorage.setItem('palettes',JSON.stringify($palettes));
     }
-    // TEMPLATE
-    // Each palette has this structure:
-    // let palette = {
-    //     name:string,
-    //     hue_value:number
-    // }
+    function deletePalette(hueOfPaletteToDelete){
+        const filtered = $palettes.filter((paletteObject)=>{return paletteObject.hue_value != hueOfPaletteToDelete});
+        // the "filtered" variable is every palette except the one we are trying to delete. We are setting the store to this new array
+        palettes.set(filtered);
+        //This is saving the new store without the deleted palette, to the localStorage database. 
+        //The store is updated on line 19. This is saving it to the website. then it should work now?yes 
+        localStorage.setItem('palettes',JSON.stringify($palettes));
+    }
 </script>
 
 <Modal>
-    <div slot="header" class="flex flex-row w-full"><h1 class="font-bold">My header</h1><button on:click={()=>{dispatch('close')}}>&times;</button></div>
+    <div slot="header" class="flex flex-row w-full "><h1 class="font-bold">My header</h1><button on:click={()=>{dispatch('close')}}>&times;</button></div>
     <div slot="content" class="flex flex-col w-full">
         <div class="flex flex-row">
             <input type="text" bind:value={paletteName}>
@@ -33,7 +35,7 @@
             {#if $palettes.length}
                 {#each $palettes as palette}
                     <div class="flex flex-row">
-                        <span>{palette.name}</span> <Button on:click={()=>{dispatch('load', palette.hue_value)}}>Load</Button><Button>Delete</Button>
+                        <span>{palette.name}</span> <Button on:click={()=>{dispatch('load', palette.hue_value)}}>Load</Button><Button on:click={()=>{deletePalette(palette.hue_value)}}>Delete</Button>
                     </div>
                 {/each}
             {:else}

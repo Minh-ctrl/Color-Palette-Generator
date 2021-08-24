@@ -27,14 +27,14 @@
 		<Button on:click={()=>{isModalOpen=!isModalOpen}}>Save/Load Palette</Button>
 	</div>
 	<div class="flex flex-row flex-wrap justify-around h-screen">
-		<Color_box color_hue={default_color} steps=20/> 
+		<Color_box color_hue={default_color} steps=10/> 
 		<Color_box color_hue={default_color} steps=40/>
-		<Color_box color_hue={default_color} steps=60/>
-		<Color_box color_hue={default_color} steps=80/>
+		<Color_box color_hue={default_color} steps=70/>
 		<Color_box color_hue={default_color} steps=100/>
+		<Color_box color_hue={default_color} steps=130/>
 		<!-- saving a loading function/ see all the palette i made/ randomize function-->
 	</div>
 </main>  
 {#if isModalOpen}
-	<PaletteLoader on:load={loadPalette} hue_value={default_color} />
+	<PaletteLoader on:load={loadPalette} hue_value={default_color} on:close={()=>{isModalOpen=false}}/>
 {/if}
