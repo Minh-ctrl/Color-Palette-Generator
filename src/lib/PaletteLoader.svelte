@@ -35,7 +35,11 @@
             {#if $palettes.length}
                 {#each $palettes as palette}
                     <div class="flex flex-row">
-                        <span>{palette.name}</span> <Button on:click={()=>{dispatch('load', palette.hue_value)}}>Load</Button><Button on:click={()=>{deletePalette(palette.hue_value)}}>Delete</Button>
+                        <span>{palette.name}</span> 
+                        <Button 
+                        on:click={()=>{dispatch('load', palette.hue_value)}}>Load</Button>
+                        <Button on:click={()=>{deletePalette(palette.hue_value)}}>
+                            Delete</Button>
                     </div>
                 {/each}
             {:else}
